@@ -1,11 +1,11 @@
 #include "odometry_compute.hpp"
 #include <cmath>
 
-namespace Ackerman
+namespace MobileRobotOdometry
 {
     // Constructor to initialise the member variables and set
     // the initial robot state
-    OdometryCompute::OdometryCompute(double wheel_radius_m, double wheelbase_m) :
+    Ackerman::Ackerman(double wheel_radius_m, double wheelbase_m) :
     wheel_radius_m_(wheel_radius_m),
     wheelbase_m_(wheelbase_m)
     {
@@ -18,7 +18,7 @@ namespace Ackerman
         current_ = {0.0, 0.0};
     }
 
-    void OdometryCompute::update_robot_state(double steering_angle)
+    void Ackerman::update_robot_state(double steering_angle)
     {
         // Conversion from degrees to radians
         // theta = radians * pi / 180
@@ -30,7 +30,7 @@ namespace Ackerman
     }
 
     // Method to calculate the overall linear velocity of the robot
-    void OdometryCompute::compute_linear_velocity()
+    void Ackerman::compute_linear_velocity()
         {
             // Angular displacements of the left and right wheels
             // Angular displacement (theta) = (current_ticks - previous_ticks) * 2 * pi / ticks_per_revolution
@@ -55,7 +55,7 @@ namespace Ackerman
             robot_velocity_ =  (left_velocity + right_velocity) / 2;
         }
 
-    void OdometryCompute::compute_orientation()
+    void Ackerman::compute_orientation()
     {
         // The instantaneous rate of change of the robot's heading
         // θ' = (v / l) * tan(ϕ)
@@ -66,7 +66,7 @@ namespace Ackerman
         current_state_.theta += theta_dot * Odometry::update_interval_s;
     }
 
-    void OdometryCompute::compute_x_y_coordinates()
+    void Ackerman::compute_x_y_coordinates()
     {
         // The instantaneous rate of change of the x and y coordinates
         // x' = v * cos(θ)

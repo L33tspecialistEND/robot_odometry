@@ -25,13 +25,13 @@ namespace Odometry
     double encoder_ticks_per_revolution{ };     // The value will depend on the wheel encoder
 }
 
-namespace Ackerman
+namespace MobileRobotOdometry
 {
-    class OdometryCompute
+    class Ackerman
     {
         public:
             // Constructor passes values for wheel radius and wheelbase
-            OdometryCompute(double wheel_radius_m, double wheelbase_m);
+            Ackerman(double wheel_radius_m, double wheelbase_m);
 
             // Calls the methods that will be used to calculate and update 
             // the parameters of the robot's state.
