@@ -22,14 +22,13 @@ struct WheelEncoders
 namespace Odometry
 {
     double update_interval_s{ 0.1 };            // Value will be used in a loop that will update the state
-    double encoder_ticks_per_revolution{ };
+    double encoder_ticks_per_revolution{ };     // The value will depend on the wheel encoder
 }
 
 class OdometryCompute
 {
     public:
-        // Constructor passed values for wheel radius, wheelbase and initial robot
-        // velocity of 0
+        // Constructor passes values for wheel radius and wheelbase
         OdometryCompute(double wheel_radius_m, double wheelbase_m);
 
         // Calls the methods that will be used to calculate and update
