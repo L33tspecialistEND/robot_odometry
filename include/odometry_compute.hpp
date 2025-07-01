@@ -25,34 +25,37 @@ namespace Odometry
     double encoder_ticks_per_revolution{ };     // The value will depend on the wheel encoder
 }
 
-class OdometryCompute
+namespace Ackerman
 {
-    public:
-        // Constructor passes values for wheel radius and wheelbase
-        OdometryCompute(double wheel_radius_m, double wheelbase_m);
+    class OdometryCompute
+    {
+        public:
+            // Constructor passes values for wheel radius and wheelbase
+            OdometryCompute(double wheel_radius_m, double wheelbase_m);
 
-        // Calls the methods that will be used to calculate and update
-        // the parameters of the robot's state.
-        // steering_angle is in degrees. It will be converted to radians
-        void update_robot_state(double steering_angle);
+            // Calls the methods that will be used to calculate and update 
+            // the parameters of the robot's state.
+            // steering_angle is in degrees. It will be converted to radians
+            void update_robot_state(double steering_angle);
 
-    private:
-        double wheel_radius_m_;     // Radius of a wheel
-        double wheelbase_m_;        // Distance between front and rear wheel axle
-        double robot_velocity_;     // Overall velocity from the center of the rear-wheel axle
-        RobotState current_state_;  // Current robot position and orientation
-        WheelEncoders previous_;    // Last recorded tick number from left and right encoders
-        WheelEncoders current_;     // Current total tick number from left and right encoders
+        private:
+            double wheel_radius_m_;     // Radius of a wheel
+            double wheelbase_m_;        // Distance between front and rear wheel axle
+            double robot_velocity_;     // Overall velocity from the center of the rear-wheel axle
+            RobotState current_state_;  // Current robot position and orientation
+            WheelEncoders previous_;    // Last recorded tick number from left and right encoders
+            WheelEncoders current_;     // Current total tick number from left and right encoders
         
-        // Calculate the overall linear velocity of the robot using the
-        // number of ticks from the wheel encoders
-        void compute_linear_velocity();
+            // Calculate the overall linear velocity of the robot using the
+            // number of ticks from the wheel encoders
+            void compute_linear_velocity();
 
-        // Calculate the orientation of the robot
-        void compute_orientation();
+            // Calculate the orientation of the robot
+            void compute_orientation();
 
-        // Calculate the current x and y coordinates of the robot
-        void compute_x_y_coordinates();
-};
+            // Calculate the current x and y coordinates of the robot
+            void compute_x_y_coordinates();
+    };
+}
 
 #endif 
